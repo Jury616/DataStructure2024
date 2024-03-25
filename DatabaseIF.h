@@ -1,3 +1,5 @@
+# ifndef _DATABASEIF_H_
+#define _DATABASEIF_H_
 # include <string>
 
 class  Database_IF{
@@ -35,3 +37,5 @@ public:
   virtual int get_comments_num();
 };
 
+
+#endif
