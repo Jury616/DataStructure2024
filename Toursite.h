@@ -4,6 +4,7 @@
 #include "Place.h"
 #include "Comments.h"
 #include "DatabaseIF.h"
+#include "File.h"
 # define TOURSITE_CAPACITY 100
 
 class Toursite
@@ -23,15 +24,20 @@ protected:            // 邻接矩阵
   int like_num;   
   Comments * comments ;
   int grade;
+  std::string * address;
   std::string * introduction;
   void sync_grade();
   int ** copy_adjacent_matrix();
   Place ** copy_places();
   int brute(std::string*t, std::string*p);
 public:
+  void set_address(std::string * add);
+  void set_adjacent_matrix(int** adj_p);
   ToursiteTopo * get_topo(); 
   ToursiteRM();
-  ToursiteRM(int index , std:: string * name ,int place_num , Place ** places,int** adjacent_matrix) ;
+  ToursiteRM(int index , std:: string *name , std:: string *intro,int place_num  ,int like_num , std:: string * add);
+ int load_adj_matrix(ToursiteProxy * proxy );
+  int load();
   ~ToursiteRM();                       // 析构函数
   /* 需要用到的 getter */
   std :: string* get_name();
@@ -41,8 +47,8 @@ public:
   std :: string* get_comment(int index);
   int get_place_num();
 //Place * get place (int index);
-  std::string*  get_introduction ( ){return this->introduction; };
-  int get_grade(){this->sync_grade();return this-> grade;} 
+  std::string*  get_introduction ( );
+  int get_grade() ;
 /*
   Place *  get_place ( int index); 
   Place *  get_place ( std :: string name);
@@ -53,5 +59,6 @@ public:
   /*setter */
   void add_comment(std:: string*content);
   void add_like();
+  void print_all();
 };
 #endif
